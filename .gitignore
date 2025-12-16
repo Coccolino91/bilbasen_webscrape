@@ -15,3 +15,7 @@ data/
 
 # Jupyter Notebook checkpoint folders
 .ipynb_checkpoints/
+
+# Cron logs and output
+logs/
+output/
