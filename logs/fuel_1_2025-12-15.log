@@ -1,0 +1,696 @@
+/usr/bin/python3: No module named papermill
+Input Notebook:  bilbasen webscrape v1.1.ipynb
+Output Notebook: output/last_fuel_run_1.ipynb
+Passed unknown parameter: selected_fuel_type
+Input notebook does not contain a cell with tag 'parameters'
+Executing:   0%|          | 0/23 [00:00<?, ?cell/s]Executing notebook with kernel: python3
+Executing:   4%|▍         | 1/23 [00:00<00:21,  1.03cell/s]Executing:   9%|▊         | 2/23 [00:01<00:14,  1.49cell/s]Executing:  17%|█▋        | 4/23 [00:02<00:11,  1.71cell/s]Executing:  22%|██▏       | 5/23 [00:03<00:11,  1.54cell/s]Executing:  35%|███▍      | 8/23 [08:12<23:17, 93.17s/cell]Executing:  35%|███▍      | 8/23 [08:13<15:26, 61.74s/cell]
+
+Aborted!
+Task exception was never retrieved
+future: <Task finished name='Task-32' coro=<NotebookClient.async_execute_cell() done, defined at /home/pi-vault/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/nbclient/client.py:920> exception=CellExecutionError('An error occurred while executing the following cell:\n------------------\ndef download_brand(brand: str, selected_fuel_type: str):\n    page_listings = []\n    base_url = (\n        f"https://www.bilbasen.dk/brugt/bil/{brand}"\n        f"?fuel={selected_fuel_type}&includeengroscvr=true&includeleasing=false"\n    )\n    driver.get(base_url)\n    try:\n        WebDriverWait(driver, 10).until(\n            EC.presence_of_element_located((By.CSS_SELECTOR, "span[data-e2e=\'pagination-total\']"))\n        )\n    except TimeoutException:\n        print(f"Timeout waiting for pagination on: {brand}")\n        return None\n\n    soup1 = BeautifulSoup(driver.page_source, "html.parser")\n    page_tag = soup1.find(\'span\', {\'data-e2e\': \'pagination-total\'})\n    if not (page_tag and page_tag.text.isdigit()):\n        print(f"→ Skipping {brand}: 0 pages found")\n        return None\n\n    max_page = int(page_tag.text)\n\n    for page in range(1, max_page + 1):\n        paged_url = f"{base_url}&page={page}"\n        print(f"Fetching {brand} page {page}/{max_page}")\n        driver.get(paged_url)\n        soup = BeautifulSoup(driver.page_source, "html.parser")\n\n        for art in soup.find_all("article"):\n            if "".join(art.get("class", [])).startswith("Listing_listing"):\n                for a in art.find_all("a", class_=lambda c: c and c.startswith("Listing_link")):\n                    page_listings.append(a["href"])\n\n    return page_listings\n\nlistings = []\n\nfor b in car_brands:\n    pl = download_brand(b,str(selected_fuel_type))\n    if pl:\n        listings.extend(pl)\n------------------\n\n----- stdout -----\nTimeout waiting for pagination on: AC\n----- stdout -----\nFetching Abarth page 1/1\n----- stdout -----\nFetching Aiways page 1/3\n----- stdout -----\nFetching Aiways page 2/3\n----- stdout -----\nFetching Aiways page 3/3\n----- stdout -----\nFetching Alfa Romeo page 1/1\n----- stdout -----\nTimeout waiting for pagination on: Alpina\n----- stdout -----\nTimeout waiting for pagination on: Aston Martin\n----- stdout -----\nTimeout waiting for pagination on: Auburn\n----- stdout -----\nFetching Audi page 1/49\n----- stdout -----\nFetching Audi page 2/49\n----- stdout -----\nFetching Audi page 3/49\n----- stdout -----\nFetching Audi page 4/49\n----- stdout -----\nFetching Audi page 5/49\n----- stdout -----\nFetching Audi page 6/49\n----- stdout -----\nFetching Audi page 7/49\n----- stdout -----\nFetching Audi page 8/49\n----- stdout -----\nFetching Audi page 9/49\n----- stdout -----\nFetching Audi page 10/49\n----- stdout -----\nFetching Audi page 11/49\n----- stdout -----\nFetching Audi page 12/49\n----- stdout -----\nFetching Audi page 13/49\n----- stdout -----\nFetching Audi page 14/49\n----- stdout -----\nFetching Audi page 15/49\n----- stdout -----\nFetching Audi page 16/49\n----- stdout -----\nFetching Audi page 17/49\n----- stdout -----\nFetching Audi page 18/49\n----- stdout -----\nFetching Audi page 19/49\n----- stdout -----\nFetching Audi page 20/49\n----- stdout -----\nFetching Audi page 21/49\n----- stdout -----\nFetching Audi page 22/49\n----- stdout -----\nFetching Audi page 23/49\n----- stdout -----\nFetching Audi page 24/49\n----- stdout -----\nFetching Audi page 25/49\n----- stdout -----\nFetching Audi page 26/49\n----- stdout -----\nFetching Audi page 27/49\n----- stdout -----\nFetching Audi page 28/49\n----- stdout -----\nFetching Audi page 29/49\n----- stdout -----\nFetching Audi page 30/49\n----- stdout -----\nFetching Audi page 31/49\n----- stdout -----\nFetching Audi page 32/49\n----- stdout -----\nFetching Audi page 33/49\n----- stdout -----\nFetching Audi page 34/49\n----- stdout -----\nFetching Audi page 35/49\n----- stdout -----\nFetching Audi page 36/49\n----- stdout -----\nFetching Audi page 37/49\n----- stdout -----\nFetching Audi page 38/49\n----- stdout -----\nFetching Audi page 39/49\n----- stdout -----\nFetching Audi page 40/49\n----- stdout -----\nFetching Audi page 41/49\n----- stdout -----\nFetching Audi page 42/49\n----- stdout -----\nFetching Audi page 43/49\n----- stdout -----\nFetching Audi page 44/49\n----- stdout -----\nFetching Audi page 45/49\n----- stdout -----\nFetching Audi page 46/49\n----- stdout -----\nFetching Audi page 47/49\n----- stdout -----\nFetching Audi page 48/49\n----- stdout -----\nFetching Audi page 49/49\n----- stdout -----\nTimeout waiting for pagination on: Austin\n----- stdout -----\nTimeout waiting for pagination on: Austin Healey\n----- stdout -----\nFetching BMW page 1/43\n----- stdout -----\nFetching BMW page 2/43\n----- stdout -----\nFetching BMW page 3/43\n----- stdout -----\nFetching BMW page 4/43\n----- stdout -----\nFetching BMW page 5/43\n----- stdout -----\nFetching BMW page 6/43\n----- stdout -----\nFetching BMW page 7/43\n----- stdout -----\nFetching BMW page 8/43\n----- stdout -----\nFetching BMW page 9/43\n----- stdout -----\nFetching BMW page 10/43\n----- stdout -----\nFetching BMW page 11/43\n----- stdout -----\nFetching BMW page 12/43\n----- stdout -----\nFetching BMW page 13/43\n----- stdout -----\nFetching BMW page 14/43\n----- stdout -----\nFetching BMW page 15/43\n----- stdout -----\nFetching BMW page 16/43\n----- stdout -----\nFetching BMW page 17/43\n----- stdout -----\nFetching BMW page 18/43\n----- stdout -----\nFetching BMW page 19/43\n----- stdout -----\nFetching BMW page 20/43\n----- stdout -----\nFetching BMW page 21/43\n----- stdout -----\nFetching BMW page 22/43\n----- stdout -----\nFetching BMW page 23/43\n----- stdout -----\nFetching BMW page 24/43\n----- stdout -----\nFetching BMW page 25/43\n----- stdout -----\nFetching BMW page 26/43\n----- stdout -----\nFetching BMW page 27/43\n----- stdout -----\nFetching BMW page 28/43\n----- stdout -----\nFetching BMW page 29/43\n----- stdout -----\nFetching BMW page 30/43\n----- stdout -----\nFetching BMW page 31/43\n----- stdout -----\nFetching BMW page 32/43\n----- stdout -----\nFetching BMW page 33/43\n----- stdout -----\nFetching BMW page 34/43\n----- stdout -----\nFetching BMW page 35/43\n----- stdout -----\nFetching BMW page 36/43\n----- stdout -----\nFetching BMW page 37/43\n----- stdout -----\nFetching BMW page 38/43\n----- stdout -----\nFetching BMW page 39/43\n----- stdout -----\nFetching BMW page 40/43\n----- stdout -----\nFetching BMW page 41/43\n----- stdout -----\nFetching BMW page 42/43\n----- stdout -----\nFetching BMW page 43/43\n----- stdout -----\nFetching BYD page 1/4\n----- stdout -----\nFetching BYD page 2/4\n----- stdout -----\nFetching BYD page 3/4\n----- stdout -----\nFetching BYD page 4/4\n----- stdout -----\nTimeout waiting for pagination on: Bentley\n----- stdout -----\nTimeout waiting for pagination on: Borgward\n----- stdout -----\nTimeout waiting for pagination on: Buick\n----- stdout -----\nTimeout waiting for pagination on: Cadillac\n----- stdout -----\nTimeout waiting for pagination on: Chevrolet\n----- stdout -----\nTimeout waiting for pagination on: Chrysler\n----- stdout -----\nFetching Citroën page 1/10\n----- stdout -----\nFetching Citroën page 2/10\n----- stdout -----\nFetching Citroën page 3/10\n----- stdout -----\nFetching Citroën page 4/10\n----- stdout -----\nFetching Citroën page 5/10\n----- stdout -----\nFetching Citroën page 6/10\n----- stdout -----\nFetching Citroën page 7/10\n----- stdout -----\nFetching Citroën page 8/10\n----- stdout -----\nFetching Citroën page 9/10\n----- stdout -----\nFetching Citroën page 10/10\n----- stdout -----\nTimeout waiting for pagination on: Corvette\n----- stdout -----\nFetching Cupra page 1/21\n----- stdout -----\nFetching Cupra page 2/21\n----- stdout -----\nFetching Cupra page 3/21\n----- stdout -----\nFetching Cupra page 4/21\n----- stdout -----\nFetching Cupra page 5/21\n----- stdout -----\nFetching Cupra page 6/21\n----- stdout -----\nFetching Cupra page 7/21\n----- stdout -----\nFetching Cupra page 8/21\n----- stdout -----\nFetching Cupra page 9/21\n----- stdout -----\nFetching Cupra page 10/21\n----- stdout -----\nFetching Cupra page 11/21\n----- stdout -----\nFetching Cupra page 12/21\n----- stdout -----\nFetching Cupra page 13/21\n----- stdout -----\nFetching Cupra page 14/21\n----- stdout -----\nFetching Cupra page 15/21\n----- stdout -----\nFetching Cupra page 16/21\n----- stdout -----\nFetching Cupra page 17/21\n----- stdout -----\nFetching Cupra page 18/21\n----- stdout -----\nFetching Cupra page 19/21\n----- stdout -----\nFetching Cupra page 20/21\n----- stdout -----\nFetching Cupra page 21/21\n----- stdout -----\nFetching DFSK page 1/1\n----- stdout -----\nTimeout waiting for pagination on: DKW\n----- stdout -----\nFetching DS page 1/1\n----- stdout -----\nFetching Dacia page 1/1\n----- stdout -----\nTimeout waiting for pagination on: Daewoo\n----- stdout -----\nTimeout waiting for pagination on: Daihatsu\n----- stdout -----\nTimeout waiting for pagination on: Daimler\n----- stdout -----\nTimeout waiting for pagination on: Dallara\n----- stdout -----\nTimeout waiting for pagination on: Datsun\n----- stdout -----\nTimeout waiting for pagination on: Dodge\n----- stdout -----\nFetching Exlantix page 1/1\n----- stdout -----\nTimeout waiting for pagination on: Ferrari\n----- stdout -----\nFetching Fiat page 1/14\n----- stdout -----\nFetching Fiat page 2/14\n----- stdout -----\nFetching Fiat page 3/14\n----- stdout -----\nFetching Fiat page 4/14\n----- stdout -----\nFetching Fiat page 5/14\n----- stdout -----\nFetching Fiat page 6/14\n----- stdout -----\nFetching Fiat page 7/14\n----- stdout -----\nFetching Fiat page 8/14\n----- stdout -----\nFetching Fiat page 9/14\n----- stdout -----\nFetching Fiat page 10/14\n----- stdout -----\nFetching Fiat page 11/14\n----- stdout -----\nFetching Fiat page 12/14\n----- stdout -----\nFetching Fiat page 13/14\n----- stdout -----\nFetching Fiat page 14/14\n----- stdout -----\nFetching Fisker page 1/1\n----- stdout -----\nFetching Ford page 1/26\n----- stdout -----\nFetching Ford page 2/26\n----- stdout -----\nFetching Ford page 3/26\n----- stdout -----\nFetching Ford page 4/26\n----- stdout -----\nFetching Ford page 5/26\n----- stdout -----\nFetching Ford page 6/26\n----- stdout -----\nFetching Ford page 7/26\n----- stdout -----\nFetching Ford page 8/26\n----- stdout -----\nFetching Ford page 9/26\n----- stdout -----\nFetching Ford page 10/26\n----- stdout -----\nFetching Ford page 11/26\n----- stdout -----\nFetching Ford page 12/26\n----- stdout -----\nFetching Ford page 13/26\n----- stdout -----\nFetching Ford page 14/26\n----- stdout -----\nFetching Ford page 15/26\n----- stdout -----\nFetching Ford page 16/26\n----- stdout -----\nFetching Ford page 17/26\n----- stdout -----\nFetching Ford page 18/26\n----- stdout -----\nFetching Ford page 19/26\n----- stdout -----\nFetching Ford page 20/26\n----- stdout -----\nFetching Ford page 21/26\n----- stdout -----\nFetching Ford page 22/26\n----- stdout -----\nFetching Ford page 23/26\n----- stdout -----\nFetching Ford page 24/26\n----- stdout -----\nFetching Ford page 25/26\n----- stdout -----\nFetching Ford page 26/26\n----- stdout -----\nFetching Honda page 1/1\n----- stdout -----\nFetching Hongqi page 1/2\n----- stdout -----\nFetching Hongqi page 2/2\n----- stdout -----\nFetching Hyundai page 1/25\n----- stdout -----\nFetching Hyundai page 2/25\n----- stdout -----\nFetching Hyundai page 3/25\n----- stdout -----\nFetching Hyundai page 4/25\n----- stdout -----\nFetching Hyundai page 5/25\n----- stdout -----\nFetching Hyundai page 6/25\n----- stdout -----\nFetching Hyundai page 7/25\n----- stdout -----\nFetching Hyundai page 8/25\n----- stdout -----\nFetching Hyundai page 9/25\n----- stdout -----\nFetching Hyundai page 10/25\n----- stdout -----\nFetching Hyundai page 11/25\n----- stdout -----\nFetching Hyundai page 12/25\n----- stdout -----\nFetching Hyundai page 13/25\n----- stdout -----\nFetching Hyundai page 14/25\n----- stdout -----\nFetching Hyundai page 15/25\n------------------\n\n\x1b[31m---------------------------------------------------------------------------\x1b[39m\n\x1b[31mKeyboardInterrupt\x1b[39m                         Traceback (most recent call last)\n\x1b[36mCell\x1b[39m\x1b[36m \x1b[39m\x1b[32mIn[8]\x1b[39m\x1b[32m, line 40\x1b[39m\n\x1b[32m     37\x1b[39m listings = []\n\x1b[32m     39\x1b[39m \x1b[38;5;28;01mfor\x1b[39;00m b \x1b[38;5;129;01min\x1b[39;00m car_brands:\n\x1b[32m---> \x1b[39m\x1b[32m40\x1b[39m     pl = \x1b[43mdownload_brand\x1b[49m\x1b[43m(\x1b[49m\x1b[43mb\x1b[49m\x1b[43m,\x1b[49m\x1b[38;5;28;43mstr\x1b[39;49m\x1b[43m(\x1b[49m\x1b[43mselected_fuel_type\x1b[49m\x1b[43m)\x1b[49m\x1b[43m)\x1b[49m\n\x1b[32m     41\x1b[39m     \x1b[38;5;28;01mif\x1b[39;00m pl:\n\x1b[32m     42\x1b[39m         listings.extend(pl)\n\n\x1b[36mCell\x1b[39m\x1b[36m \x1b[39m\x1b[32mIn[8]\x1b[39m\x1b[32m, line 27\x1b[39m, in \x1b[36mdownload_brand\x1b[39m\x1b[34m(brand, selected_fuel_type)\x1b[39m\n\x1b[32m     25\x1b[39m paged_url = \x1b[33mf\x1b[39m\x1b[33m"\x1b[39m\x1b[38;5;132;01m{\x1b[39;00mbase_url\x1b[38;5;132;01m}\x1b[39;00m\x1b[33m&page=\x1b[39m\x1b[38;5;132;01m{\x1b[39;00mpage\x1b[38;5;132;01m}\x1b[39;00m\x1b[33m"\x1b[39m\n\x1b[32m     26\x1b[39m \x1b[38;5;28mprint\x1b[39m(\x1b[33mf\x1b[39m\x1b[33m"\x1b[39m\x1b[33mFetching \x1b[39m\x1b[38;5;132;01m{\x1b[39;00mbrand\x1b[38;5;132;01m}\x1b[39;00m\x1b[33m page \x1b[39m\x1b[38;5;132;01m{\x1b[39;00mpage\x1b[38;5;132;01m}\x1b[39;00m\x1b[33m/\x1b[39m\x1b[38;5;132;01m{\x1b[39;00mmax_page\x1b[38;5;132;01m}\x1b[39;00m\x1b[33m"\x1b[39m)\n\x1b[32m---> \x1b[39m\x1b[32m27\x1b[39m \x1b[43mdriver\x1b[49m\x1b[43m.\x1b[49m\x1b[43mget\x1b[49m\x1b[43m(\x1b[49m\x1b[43mpaged_url\x1b[49m\x1b[43m)\x1b[49m\n\x1b[32m     28\x1b[39m soup = BeautifulSoup(driver.page_source, \x1b[33m"\x1b[39m\x1b[33mhtml.parser\x1b[39m\x1b[33m"\x1b[39m)\n\x1b[32m     30\x1b[39m \x1b[38;5;28;01mfor\x1b[39;00m art \x1b[38;5;129;01min\x1b[39;00m soup.find_all(\x1b[33m"\x1b[39m\x1b[33marticle\x1b[39m\x1b[33m"\x1b[39m):\n\n\x1b[36mFile \x1b[39m\x1b[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py:452\x1b[39m, in \x1b[36mWebDriver.get\x1b[39m\x1b[34m(self, url)\x1b[39m\n\x1b[32m    439\x1b[39m \x1b[38;5;28;01mdef\x1b[39;00m\x1b[38;5;250m \x1b[39m\x1b[34mget\x1b[39m(\x1b[38;5;28mself\x1b[39m, url: \x1b[38;5;28mstr\x1b[39m) -> \x1b[38;5;28;01mNone\x1b[39;00m:\n\x1b[32m    440\x1b[39m \x1b[38;5;250m    \x1b[39m\x1b[33;03m"""Navigate the browser to the specified URL.\x1b[39;00m\n\x1b[32m    441\x1b[39m \n\x1b[32m    442\x1b[39m \x1b[33;03m    The method does not return until the page is fully loaded (i.e. the\x1b[39;00m\n\x1b[32m   (...)\x1b[39m\x1b[32m    450\x1b[39m \x1b[33;03m        `driver.get("https://example.com")`\x1b[39;00m\n\x1b[32m    451\x1b[39m \x1b[33;03m    """\x1b[39;00m\n\x1b[32m--> \x1b[39m\x1b[32m452\x1b[39m     \x1b[38;5;28;43mself\x1b[39;49m\x1b[43m.\x1b[49m\x1b[43mexecute\x1b[49m\x1b[43m(\x1b[49m\x1b[43mCommand\x1b[49m\x1b[43m.\x1b[49m\x1b[43mGET\x1b[49m\x1b[43m,\x1b[49m\x1b[43m \x1b[49m\x1b[43m{\x1b[49m\x1b[33;43m"\x1b[39;49m\x1b[33;43murl\x1b[39;49m\x1b[33;43m"\x1b[39;49m\x1b[43m:\x1b[49m\x1b[43m \x1b[49m\x1b[43murl\x1b[49m\x1b[43m}\x1b[49m\x1b[43m)\x1b[49m\n\n\x1b[36mFile \x1b[39m\x1b[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py:429\x1b[39m, in \x1b[36mWebDriver.execute\x1b[39m\x1b[34m(self, driver_command, params)\x1b[39m\n\x1b[32m    426\x1b[39m     \x1b[38;5;28;01melif\x1b[39;00m \x1b[33m"\x1b[39m\x1b[33msessionId\x1b[39m\x1b[33m"\x1b[39m \x1b[38;5;129;01mnot\x1b[39;00m \x1b[38;5;129;01min\x1b[39;00m params:\n\x1b[32m    427\x1b[39m         params[\x1b[33m"\x1b[39m\x1b[33msessionId\x1b[39m\x1b[33m"\x1b[39m] = \x1b[38;5;28mself\x1b[39m.session_id\n\x1b[32m--> \x1b[39m\x1b[32m429\x1b[39m response = \x1b[43mcast\x1b[49m\x1b[43m(\x1b[49m\x1b[43mRemoteConnection\x1b[49m\x1b[43m,\x1b[49m\x1b[43m \x1b[49m\x1b[38;5;28;43mself\x1b[39;49m\x1b[43m.\x1b[49m\x1b[43mcommand_executor\x1b[49m\x1b[43m)\x1b[49m\x1b[43m.\x1b[49m\x1b[43mexecute\x1b[49m\x1b[43m(\x1b[49m\x1b[43mdriver_command\x1b[49m\x1b[43m,\x1b[49m\x1b[43m \x1b[49m\x1b[43mparams\x1b[49m\x1b[43m)\x1b[49m\n\x1b[32m    431\x1b[39m \x1b[38;5;28;01mif\x1b[39;00m response:\n\x1b[32m    432\x1b[39m     \x1b[38;5;28mself\x1b[39m.error_handler.check_response(response)\n\n\x1b[36mFile \x1b[39m\x1b[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/selenium/webdriver/remote/remote_connection.py:405\x1b[39m, in \x1b[36mRemoteConnection.execute\x1b[39m\x1b[34m(self, command, params)\x1b[39m\n\x1b[32m    403\x1b[39m trimmed = \x1b[38;5;28mself\x1b[39m._trim_large_entries(params)\n\x1b[32m    404\x1b[39m LOGGER.debug(\x1b[33m"\x1b[39m\x1b[38;5;132;01m%s\x1b[39;00m\x1b[33m \x1b[39m\x1b[38;5;132;01m%s\x1b[39;00m\x1b[33m \x1b[39m\x1b[38;5;132;01m%s\x1b[39;00m\x1b[33m"\x1b[39m, command_info[\x1b[32m0\x1b[39m], url, \x1b[38;5;28mstr\x1b[39m(trimmed))\n\x1b[32m--> \x1b[39m\x1b[32m405\x1b[39m \x1b[38;5;28;01mreturn\x1b[39;00m \x1b[38;5;28;43mself\x1b[39;49m\x1b[43m.\x1b[49m\x1b[43m_request\x1b[49m\x1b[43m(\x1b[49m\x1b[43mcommand_info\x1b[49m\x1b[43m[\x1b[49m\x1b[32;43m0\x1b[39;49m\x1b[43m]\x1b[49m\x1b[43m,\x1b[49m\x1b[43m \x1b[49m\x1b[43murl\x1b[49m\x1b[43m,\x1b[49m\x1b[43m \x1b[49m\x1b[43mbody\x1b[49m\x1b[43m=\x1b[49m\x1b[43mdata\x1b[49m\x1b[43m)\x1b[49m\n\n\x1b[36mFile \x1b[39m\x1b[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/selenium/webdriver/remote/remote_connection.py:429\x1b[39m, in \x1b[36mRemoteConnection._request\x1b[39m\x1b[34m(self, method, url, body)\x1b[39m\n\x1b[32m    426\x1b[39m     body = \x1b[38;5;28;01mNone\x1b[39;00m\n\x1b[32m    428\x1b[39m \x1b[38;5;28;01mif\x1b[39;00m \x1b[38;5;28mself\x1b[39m._client_config.keep_alive:\n\x1b[32m--> \x1b[39m\x1b[32m429\x1b[39m     response = \x1b[38;5;28;43mself\x1b[39;49m\x1b[43m.\x1b[49m\x1b[43m_conn\x1b[49m\x1b[43m.\x1b[49m\x1b[43mrequest\x1b[49m\x1b[43m(\x1b[49m\x1b[43mmethod\x1b[49m\x1b[43m,\x1b[49m\x1b[43m \x1b[49m\x1b[43murl\x1b[49m\x1b[43m,\x1b[49m\x1b[43m \x1b[49m\x1b[43mbody\x1b[49m\x1b[43m=\x1b[49m\x1b[43mbody\x1b[49m\x1b[43m,\x1b[49m\x1b[43m \x1b[49m\x1b[43mheaders\x1b[49m\x1b[43m=\x1b[49m\x1b[43mheaders\x1b[49m\x1b[43m,\x1b[49m\x1b[43m \x1b[49m\x1b[43mtimeout\x1b[49m\x1b[43m=\x1b[49m\x1b[38;5;28;43mself\x1b[39;49m\x1b[43m.\x1b[49m\x1b[43m_client_config\x1b[49m\x1b[43m.\x1b[49m\x1b[43mtimeout\x1b[49m\x1b[43m)\x1b[49m\n\x1b[32m    430\x1b[39m     statuscode = response.status\n\x1b[32m    431\x1b[39m \x1b[38;5;28;01melse\x1b[39;00m:\n\n\x1b[36mFile \x1b[39m\x1b[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/urllib3/_request_methods.py:143\x1b[39m, in \x1b[36mRequestMethods.request\x1b[39m\x1b[34m(self, method, url, body, fields, headers, json, **urlopen_kw)\x1b[39m\n\x1b[32m    135\x1b[39m     \x1b[38;5;28;01mreturn\x1b[39;00m \x1b[38;5;28mself\x1b[39m.request_encode_url(\n\x1b[32m    136\x1b[39m         method,\n\x1b[32m    137\x1b[39m         url,\n\x1b[32m   (...)\x1b[39m\x1b[32m    140\x1b[39m         **urlopen_kw,\n\x1b[32m    141\x1b[39m     )\n\x1b[32m    142\x1b[39m \x1b[38;5;28;01melse\x1b[39;00m:\n\x1b[32m--> \x1b[39m\x1b[32m143\x1b[39m     \x1b[38;5;28;01mreturn\x1b[39;00m \x1b[38;5;28;43mself\x1b[39;49m\x1b[43m.\x1b[49m\x1b[43mrequest_encode_body\x1b[49m\x1b[43m(\x1b[49m\n\x1b[32m    144\x1b[39m \x1b[43m        \x1b[49m\x1b[43mmethod\x1b[49m\x1b[43m,\x1b[49m\x1b[43m \x1b[49m\x1b[43murl\x1b[49m\x1b[43m,\x1b[49m\x1b[43m \x1b[49m\x1b[43mfields\x1b[49m\x1b[43m=\x1b[49m\x1b[43mfields\x1b[49m\x1b[43m,\x1b[49m\x1b[43m \x1b[49m\x1b[43mheaders\x1b[49m\x1b[43m=\x1b[49m\x1b[43mheaders\x1b[49m\x1b[43m,\x1b[49m\x1b[43m \x1b[49m\x1b[43m*\x1b[49m\x1b[43m*\x1b[49m\x1b[43murlopen_kw\x1b[49m\n\x1b[32m    145\x1b[39m \x1b[43m    \x1b[49m\x1b[43m)\x1b[49m\n\n\x1b[36mFile \x1b[39m\x1b[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/urllib3/_request_methods.py:278\x1b[39m, in \x1b[36mRequestMethods.request_encode_body\x1b[39m\x1b[34m(self, method, url, fields, headers, encode_multipart, multipart_boundary, **urlopen_kw)\x1b[39m\n\x1b[32m    274\x1b[39m     extra_kw[\x1b[33m"\x1b[39m\x1b[33mheaders\x1b[39m\x1b[33m"\x1b[39m].setdefault(\x1b[33m"\x1b[39m\x1b[33mContent-Type\x1b[39m\x1b[33m"\x1b[39m, content_type)\n\x1b[32m    276\x1b[39m extra_kw.update(urlopen_kw)\n\x1b[32m--> \x1b[39m\x1b[32m278\x1b[39m \x1b[38;5;28;01mreturn\x1b[39;00m \x1b[38;5;28;43mself\x1b[39;49m\x1b[43m.\x1b[49m\x1b[43murlopen\x1b[49m\x1b[43m(\x1b[49m\x1b[43mmethod\x1b[49m\x1b[43m,\x1b[49m\x1b[43m \x1b[49m\x1b[43murl\x1b[49m\x1b[43m,\x1b[49m\x1b[43m \x1b[49m\x1b[43m*\x1b[49m\x1b[43m*\x1b[49m\x1b[43mextra_kw\x1b[49m\x1b[43m)\x1b[49m\n\n\x1b[36mFile \x1b[39m\x1b[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/urllib3/poolmanager.py:457\x1b[39m, in \x1b[36mPoolManager.urlopen\x1b[39m\x1b[34m(self, method, url, redirect, **kw)\x1b[39m\n\x1b[32m    455\x1b[39m     response = conn.urlopen(method, url, **kw)\n\x1b[32m    456\x1b[39m \x1b[38;5;28;01melse\x1b[39;00m:\n\x1b[32m--> \x1b[39m\x1b[32m457\x1b[39m     response = \x1b[43mconn\x1b[49m\x1b[43m.\x1b[49m\x1b[43murlopen\x1b[49m\x1b[43m(\x1b[49m\x1b[43mmethod\x1b[49m\x1b[43m,\x1b[49m\x1b[43m \x1b[49m\x1b[43mu\x1b[49m\x1b[43m.\x1b[49m\x1b[43mrequest_uri\x1b[49m\x1b[43m,\x1b[49m\x1b[43m \x1b[49m\x1b[43m*\x1b[49m\x1b[43m*\x1b[49m\x1b[43mkw\x1b[49m\x1b[43m)\x1b[49m\n\x1b[32m    459\x1b[39m redirect_location = redirect \x1b[38;5;129;01mand\x1b[39;00m response.get_redirect_location()\n\x1b[32m    460\x1b[39m \x1b[38;5;28;01mif\x1b[39;00m \x1b[38;5;129;01mnot\x1b[39;00m redirect_location:\n\n\x1b[36mFile \x1b[39m\x1b[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/urllib3/connectionpool.py:787\x1b[39m, in \x1b[36mHTTPConnectionPool.urlopen\x1b[39m\x1b[34m(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, preload_content, decode_content, **response_kw)\x1b[39m\n\x1b[32m    784\x1b[39m response_conn = conn \x1b[38;5;28;01mif\x1b[39;00m \x1b[38;5;129;01mnot\x1b[39;00m release_conn \x1b[38;5;28;01melse\x1b[39;00m \x1b[38;5;28;01mNone\x1b[39;00m\n\x1b[32m    786\x1b[39m \x1b[38;5;66;03m# Make the request on the HTTPConnection object\x1b[39;00m\n\x1b[32m--> \x1b[39m\x1b[32m787\x1b[39m response = \x1b[38;5;28;43mself\x1b[39;49m\x1b[43m.\x1b[49m\x1b[43m_make_request\x1b[49m\x1b[43m(\x1b[49m\n\x1b[32m    788\x1b[39m \x1b[43m    \x1b[49m\x1b[43mconn\x1b[49m\x1b[43m,\x1b[49m\n\x1b[32m    789\x1b[39m \x1b[43m    \x1b[49m\x1b[43mmethod\x1b[49m\x1b[43m,\x1b[49m\n\x1b[32m    790\x1b[39m \x1b[43m    \x1b[49m\x1b[43murl\x1b[49m\x1b[43m,\x1b[49m\n\x1b[32m    791\x1b[39m \x1b[43m    \x1b[49m\x1b[43mtimeout\x1b[49m\x1b[43m=\x1b[49m\x1b[43mtimeout_obj\x1b[49m\x1b[43m,\x1b[49m\n\x1b[32m    792\x1b[39m \x1b[43m    \x1b[49m\x1b[43mbody\x1b[49m\x1b[43m=\x1b[49m\x1b[43mbody\x1b[49m\x1b[43m,\x1b[49m\n\x1b[32m    793\x1b[39m \x1b[43m    \x1b[49m\x1b[43mheaders\x1b[49m\x1b[43m=\x1b[49m\x1b[43mheaders\x1b[49m\x1b[43m,\x1b[49m\n\x1b[32m    794\x1b[39m \x1b[43m    \x1b[49m\x1b[43mchunked\x1b[49m\x1b[43m=\x1b[49m\x1b[43mchunked\x1b[49m\x1b[43m,\x1b[49m\n\x1b[32m    795\x1b[39m \x1b[43m    \x1b[49m\x1b[43mretries\x1b[49m\x1b[43m=\x1b[49m\x1b[43mretries\x1b[49m\x1b[43m,\x1b[49m\n\x1b[32m    796\x1b[39m \x1b[43m    \x1b[49m\x1b[43mresponse_conn\x1b[49m\x1b[43m=\x1b[49m\x1b[43mresponse_conn\x1b[49m\x1b[43m,\x1b[49m\n\x1b[32m    797\x1b[39m \x1b[43m    \x1b[49m\x1b[43mpreload_content\x1b[49m\x1b[43m=\x1b[49m\x1b[43mpreload_content\x1b[49m\x1b[43m,\x1b[49m\n\x1b[32m    798\x1b[39m \x1b[43m    \x1b[49m\x1b[43mdecode_content\x1b[49m\x1b[43m=\x1b[49m\x1b[43mdecode_content\x1b[49m\x1b[43m,\x1b[49m\n\x1b[32m    799\x1b[39m \x1b[43m    \x1b[49m\x1b[43m*\x1b[49m\x1b[43m*\x1b[49m\x1b[43mresponse_kw\x1b[49m\x1b[43m,\x1b[49m\n\x1b[32m    800\x1b[39m \x1b[43m\x1b[49m\x1b[43m)\x1b[49m\n\x1b[32m    802\x1b[39m \x1b[38;5;66;03m# Everything went great!\x1b[39;00m\n\x1b[32m    803\x1b[39m clean_exit = \x1b[38;5;28;01mTrue\x1b[39;00m\n\n\x1b[36mFile \x1b[39m\x1b[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/urllib3/connectionpool.py:534\x1b[39m, in \x1b[36mHTTPConnectionPool._make_request\x1b[39m\x1b[34m(self, conn, method, url, body, headers, retries, timeout, chunked, response_conn, preload_content, decode_content, enforce_content_length)\x1b[39m\n\x1b[32m    532\x1b[39m \x1b[38;5;66;03m# Receive the response from the server\x1b[39;00m\n\x1b[32m    533\x1b[39m \x1b[38;5;28;01mtry\x1b[39;00m:\n\x1b[32m--> \x1b[39m\x1b[32m534\x1b[39m     response = \x1b[43mconn\x1b[49m\x1b[43m.\x1b[49m\x1b[43mgetresponse\x1b[49m\x1b[43m(\x1b[49m\x1b[43m)\x1b[49m\n\x1b[32m    535\x1b[39m \x1b[38;5;28;01mexcept\x1b[39;00m (BaseSSLError, \x1b[38;5;167;01mOSError\x1b[39;00m) \x1b[38;5;28;01mas\x1b[39;00m e:\n\x1b[32m    536\x1b[39m     \x1b[38;5;28mself\x1b[39m._raise_timeout(err=e, url=url, timeout_value=read_timeout)\n\n\x1b[36mFile \x1b[39m\x1b[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/urllib3/connection.py:571\x1b[39m, in \x1b[36mHTTPConnection.getresponse\x1b[39m\x1b[34m(self)\x1b[39m\n\x1b[32m    568\x1b[39m _shutdown = \x1b[38;5;28mgetattr\x1b[39m(\x1b[38;5;28mself\x1b[39m.sock, \x1b[33m"\x1b[39m\x1b[33mshutdown\x1b[39m\x1b[33m"\x1b[39m, \x1b[38;5;28;01mNone\x1b[39;00m)\n\x1b[32m    570\x1b[39m \x1b[38;5;66;03m# Get the response from http.client.HTTPConnection\x1b[39;00m\n\x1b[32m--> \x1b[39m\x1b[32m571\x1b[39m httplib_response = \x1b[38;5;28;43msuper\x1b[39;49m\x1b[43m(\x1b[49m\x1b[43m)\x1b[49m\x1b[43m.\x1b[49m\x1b[43mgetresponse\x1b[49m\x1b[43m(\x1b[49m\x1b[43m)\x1b[49m\n\x1b[32m    573\x1b[39m \x1b[38;5;28;01mtry\x1b[39;00m:\n\x1b[32m    574\x1b[39m     assert_header_parsing(httplib_response.msg)\n\n\x1b[36mFile \x1b[39m\x1b[32m/usr/lib/python3.13/http/client.py:1430\x1b[39m, in \x1b[36mHTTPConnection.getresponse\x1b[39m\x1b[34m(self)\x1b[39m\n\x1b[32m   1428\x1b[39m \x1b[38;5;28;01mtry\x1b[39;00m:\n\x1b[32m   1429\x1b[39m     \x1b[38;5;28;01mtry\x1b[39;00m:\n\x1b[32m-> \x1b[39m\x1b[32m1430\x1b[39m         \x1b[43mresponse\x1b[49m\x1b[43m.\x1b[49m\x1b[43mbegin\x1b[49m\x1b[43m(\x1b[49m\x1b[43m)\x1b[49m\n\x1b[32m   1431\x1b[39m     \x1b[38;5;28;01mexcept\x1b[39;00m \x1b[38;5;167;01mConnectionError\x1b[39;00m:\n\x1b[32m   1432\x1b[39m         \x1b[38;5;28mself\x1b[39m.close()\n\n\x1b[36mFile \x1b[39m\x1b[32m/usr/lib/python3.13/http/client.py:331\x1b[39m, in \x1b[36mHTTPResponse.begin\x1b[39m\x1b[34m(self)\x1b[39m\n\x1b[32m    329\x1b[39m \x1b[38;5;66;03m# read until we get a non-100 response\x1b[39;00m\n\x1b[32m    330\x1b[39m \x1b[38;5;28;01mwhile\x1b[39;00m \x1b[38;5;28;01mTrue\x1b[39;00m:\n\x1b[32m--> \x1b[39m\x1b[32m331\x1b[39m     version, status, reason = \x1b[38;5;28;43mself\x1b[39;49m\x1b[43m.\x1b[49m\x1b[43m_read_status\x1b[49m\x1b[43m(\x1b[49m\x1b[43m)\x1b[49m\n\x1b[32m    332\x1b[39m     \x1b[38;5;28;01mif\x1b[39;00m status != CONTINUE:\n\x1b[32m    333\x1b[39m         \x1b[38;5;28;01mbreak\x1b[39;00m\n\n\x1b[36mFile \x1b[39m\x1b[32m/usr/lib/python3.13/http/client.py:292\x1b[39m, in \x1b[36mHTTPResponse._read_status\x1b[39m\x1b[34m(self)\x1b[39m\n\x1b[32m    291\x1b[39m \x1b[38;5;28;01mdef\x1b[39;00m\x1b[38;5;250m \x1b[39m\x1b[34m_read_status\x1b[39m(\x1b[38;5;28mself\x1b[39m):\n\x1b[32m--> \x1b[39m\x1b[32m292\x1b[39m     line = \x1b[38;5;28mstr\x1b[39m(\x1b[38;5;28;43mself\x1b[39;49m\x1b[43m.\x1b[49m\x1b[43mfp\x1b[49m\x1b[43m.\x1b[49m\x1b[43mreadline\x1b[49m\x1b[43m(\x1b[49m\x1b[43m_MAXLINE\x1b[49m\x1b[43m \x1b[49m\x1b[43m+\x1b[49m\x1b[43m \x1b[49m\x1b[32;43m1\x1b[39;49m\x1b[43m)\x1b[49m, \x1b[33m"\x1b[39m\x1b[33miso-8859-1\x1b[39m\x1b[33m"\x1b[39m)\n\x1b[32m    293\x1b[39m     \x1b[38;5;28;01mif\x1b[39;00m \x1b[38;5;28mlen\x1b[39m(line) > _MAXLINE:\n\x1b[32m    294\x1b[39m         \x1b[38;5;28;01mraise\x1b[39;00m LineTooLong(\x1b[33m"\x1b[39m\x1b[33mstatus line\x1b[39m\x1b[33m"\x1b[39m)\n\n\x1b[36mFile \x1b[39m\x1b[32m/usr/lib/python3.13/socket.py:719\x1b[39m, in \x1b[36mSocketIO.readinto\x1b[39m\x1b[34m(self, b)\x1b[39m\n\x1b[32m    717\x1b[39m     \x1b[38;5;28;01mraise\x1b[39;00m \x1b[38;5;167;01mOSError\x1b[39;00m(\x1b[33m"\x1b[39m\x1b[33mcannot read from timed out object\x1b[39m\x1b[33m"\x1b[39m)\n\x1b[32m    718\x1b[39m \x1b[38;5;28;01mtry\x1b[39;00m:\n\x1b[32m--> \x1b[39m\x1b[32m719\x1b[39m     \x1b[38;5;28;01mreturn\x1b[39;00m \x1b[38;5;28;43mself\x1b[39;49m\x1b[43m.\x1b[49m\x1b[43m_sock\x1b[49m\x1b[43m.\x1b[49m\x1b[43mrecv_into\x1b[49m\x1b[43m(\x1b[49m\x1b[43mb\x1b[49m\x1b[43m)\x1b[49m\n\x1b[32m    720\x1b[39m \x1b[38;5;28;01mexcept\x1b[39;00m timeout:\n\x1b[32m    721\x1b[39m     \x1b[38;5;28mself\x1b[39m._timeout_occurred = \x1b[38;5;28;01mTrue\x1b[39;00m\n\n\x1b[31mKeyboardInterrupt\x1b[39m: \n')>
+Traceback (most recent call last):
+  File "/home/pi-vault/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/click/core.py", line 1406, in main
+    rv = self.invoke(ctx)
+  File "/home/pi-vault/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/click/core.py", line 1269, in invoke
+    return ctx.invoke(self.callback, **ctx.params)
+           ~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pi-vault/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/click/core.py", line 824, in invoke
+    return callback(*args, **kwargs)
+  File "/home/pi-vault/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/click/decorators.py", line 34, in new_func
+    return f(get_current_context(), *args, **kwargs)
+  File "/home/pi-vault/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/papermill/cli.py", line 235, in papermill
+    execute_notebook(
+    ~~~~~~~~~~~~~~~~^
+        input_path=input_path,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    ...<15 lines>...
+        execution_timeout=execution_timeout,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/home/pi-vault/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/papermill/execute.py", line 116, in execute_notebook
+    nb = papermill_engines.execute_notebook_with_engine(
+        engine_name,
+    ...<9 lines>...
+        **engine_kwargs,
+    )
+  File "/home/pi-vault/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/papermill/engines.py", line 48, in execute_notebook_with_engine
+    return self.get_engine(engine_name).execute_notebook(nb, kernel_name, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pi-vault/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/papermill/engines.py", line 370, in execute_notebook
+    cls.execute_managed_notebook(nb_man, kernel_name, log_output=log_output, **kwargs)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/pi-vault/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/papermill/engines.py", line 442, in execute_managed_notebook
+    return PapermillNotebookClient(nb_man, **final_kwargs).execute()
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/pi-vault/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/papermill/clientwrap.py", line 45, in execute
+    self.papermill_execute_cells()
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^
+  File "/home/pi-vault/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/papermill/clientwrap.py", line 72, in papermill_execute_cells
+    self.execute_cell(cell, index)
+    ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^
+  File "/home/pi-vault/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/jupyter_core/utils/__init__.py", line 165, in wrapped
+    return loop.run_until_complete(inner)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^
+  File "/usr/lib/python3.13/asyncio/base_events.py", line 712, in run_until_complete
+    self.run_forever()
+    ~~~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/asyncio/base_events.py", line 683, in run_forever
+    self._run_once()
+    ~~~~~~~~~~~~~~^^
+  File "/usr/lib/python3.13/asyncio/base_events.py", line 2004, in _run_once
+    event_list = self._selector.select(timeout)
+  File "/usr/lib/python3.13/selectors.py", line 452, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+KeyboardInterrupt
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pi-vault/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/nbclient/client.py", line 1062, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/home/pi-vault/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/nbclient/client.py", line 918, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+def download_brand(brand: str, selected_fuel_type: str):
+    page_listings = []
+    base_url = (
+        f"https://www.bilbasen.dk/brugt/bil/{brand}"
+        f"?fuel={selected_fuel_type}&includeengroscvr=true&includeleasing=false"
+    )
+    driver.get(base_url)
+    try:
+        WebDriverWait(driver, 10).until(
+            EC.presence_of_element_located((By.CSS_SELECTOR, "span[data-e2e='pagination-total']"))
+        )
+    except TimeoutException:
+        print(f"Timeout waiting for pagination on: {brand}")
+        return None
+
+    soup1 = BeautifulSoup(driver.page_source, "html.parser")
+    page_tag = soup1.find('span', {'data-e2e': 'pagination-total'})
+    if not (page_tag and page_tag.text.isdigit()):
+        print(f"→ Skipping {brand}: 0 pages found")
+        return None
+
+    max_page = int(page_tag.text)
+
+    for page in range(1, max_page + 1):
+        paged_url = f"{base_url}&page={page}"
+        print(f"Fetching {brand} page {page}/{max_page}")
+        driver.get(paged_url)
+        soup = BeautifulSoup(driver.page_source, "html.parser")
+
+        for art in soup.find_all("article"):
+            if "".join(art.get("class", [])).startswith("Listing_listing"):
+                for a in art.find_all("a", class_=lambda c: c and c.startswith("Listing_link")):
+                    page_listings.append(a["href"])
+
+    return page_listings
+
+listings = []
+
+for b in car_brands:
+    pl = download_brand(b,str(selected_fuel_type))
+    if pl:
+        listings.extend(pl)
+------------------
+
+----- stdout -----
+Timeout waiting for pagination on: AC
+----- stdout -----
+Fetching Abarth page 1/1
+----- stdout -----
+Fetching Aiways page 1/3
+----- stdout -----
+Fetching Aiways page 2/3
+----- stdout -----
+Fetching Aiways page 3/3
+----- stdout -----
+Fetching Alfa Romeo page 1/1
+----- stdout -----
+Timeout waiting for pagination on: Alpina
+----- stdout -----
+Timeout waiting for pagination on: Aston Martin
+----- stdout -----
+Timeout waiting for pagination on: Auburn
+----- stdout -----
+Fetching Audi page 1/49
+----- stdout -----
+Fetching Audi page 2/49
+----- stdout -----
+Fetching Audi page 3/49
+----- stdout -----
+Fetching Audi page 4/49
+----- stdout -----
+Fetching Audi page 5/49
+----- stdout -----
+Fetching Audi page 6/49
+----- stdout -----
+Fetching Audi page 7/49
+----- stdout -----
+Fetching Audi page 8/49
+----- stdout -----
+Fetching Audi page 9/49
+----- stdout -----
+Fetching Audi page 10/49
+----- stdout -----
+Fetching Audi page 11/49
+----- stdout -----
+Fetching Audi page 12/49
+----- stdout -----
+Fetching Audi page 13/49
+----- stdout -----
+Fetching Audi page 14/49
+----- stdout -----
+Fetching Audi page 15/49
+----- stdout -----
+Fetching Audi page 16/49
+----- stdout -----
+Fetching Audi page 17/49
+----- stdout -----
+Fetching Audi page 18/49
+----- stdout -----
+Fetching Audi page 19/49
+----- stdout -----
+Fetching Audi page 20/49
+----- stdout -----
+Fetching Audi page 21/49
+----- stdout -----
+Fetching Audi page 22/49
+----- stdout -----
+Fetching Audi page 23/49
+----- stdout -----
+Fetching Audi page 24/49
+----- stdout -----
+Fetching Audi page 25/49
+----- stdout -----
+Fetching Audi page 26/49
+----- stdout -----
+Fetching Audi page 27/49
+----- stdout -----
+Fetching Audi page 28/49
+----- stdout -----
+Fetching Audi page 29/49
+----- stdout -----
+Fetching Audi page 30/49
+----- stdout -----
+Fetching Audi page 31/49
+----- stdout -----
+Fetching Audi page 32/49
+----- stdout -----
+Fetching Audi page 33/49
+----- stdout -----
+Fetching Audi page 34/49
+----- stdout -----
+Fetching Audi page 35/49
+----- stdout -----
+Fetching Audi page 36/49
+----- stdout -----
+Fetching Audi page 37/49
+----- stdout -----
+Fetching Audi page 38/49
+----- stdout -----
+Fetching Audi page 39/49
+----- stdout -----
+Fetching Audi page 40/49
+----- stdout -----
+Fetching Audi page 41/49
+----- stdout -----
+Fetching Audi page 42/49
+----- stdout -----
+Fetching Audi page 43/49
+----- stdout -----
+Fetching Audi page 44/49
+----- stdout -----
+Fetching Audi page 45/49
+----- stdout -----
+Fetching Audi page 46/49
+----- stdout -----
+Fetching Audi page 47/49
+----- stdout -----
+Fetching Audi page 48/49
+----- stdout -----
+Fetching Audi page 49/49
+----- stdout -----
+Timeout waiting for pagination on: Austin
+----- stdout -----
+Timeout waiting for pagination on: Austin Healey
+----- stdout -----
+Fetching BMW page 1/43
+----- stdout -----
+Fetching BMW page 2/43
+----- stdout -----
+Fetching BMW page 3/43
+----- stdout -----
+Fetching BMW page 4/43
+----- stdout -----
+Fetching BMW page 5/43
+----- stdout -----
+Fetching BMW page 6/43
+----- stdout -----
+Fetching BMW page 7/43
+----- stdout -----
+Fetching BMW page 8/43
+----- stdout -----
+Fetching BMW page 9/43
+----- stdout -----
+Fetching BMW page 10/43
+----- stdout -----
+Fetching BMW page 11/43
+----- stdout -----
+Fetching BMW page 12/43
+----- stdout -----
+Fetching BMW page 13/43
+----- stdout -----
+Fetching BMW page 14/43
+----- stdout -----
+Fetching BMW page 15/43
+----- stdout -----
+Fetching BMW page 16/43
+----- stdout -----
+Fetching BMW page 17/43
+----- stdout -----
+Fetching BMW page 18/43
+----- stdout -----
+Fetching BMW page 19/43
+----- stdout -----
+Fetching BMW page 20/43
+----- stdout -----
+Fetching BMW page 21/43
+----- stdout -----
+Fetching BMW page 22/43
+----- stdout -----
+Fetching BMW page 23/43
+----- stdout -----
+Fetching BMW page 24/43
+----- stdout -----
+Fetching BMW page 25/43
+----- stdout -----
+Fetching BMW page 26/43
+----- stdout -----
+Fetching BMW page 27/43
+----- stdout -----
+Fetching BMW page 28/43
+----- stdout -----
+Fetching BMW page 29/43
+----- stdout -----
+Fetching BMW page 30/43
+----- stdout -----
+Fetching BMW page 31/43
+----- stdout -----
+Fetching BMW page 32/43
+----- stdout -----
+Fetching BMW page 33/43
+----- stdout -----
+Fetching BMW page 34/43
+----- stdout -----
+Fetching BMW page 35/43
+----- stdout -----
+Fetching BMW page 36/43
+----- stdout -----
+Fetching BMW page 37/43
+----- stdout -----
+Fetching BMW page 38/43
+----- stdout -----
+Fetching BMW page 39/43
+----- stdout -----
+Fetching BMW page 40/43
+----- stdout -----
+Fetching BMW page 41/43
+----- stdout -----
+Fetching BMW page 42/43
+----- stdout -----
+Fetching BMW page 43/43
+----- stdout -----
+Fetching BYD page 1/4
+----- stdout -----
+Fetching BYD page 2/4
+----- stdout -----
+Fetching BYD page 3/4
+----- stdout -----
+Fetching BYD page 4/4
+----- stdout -----
+Timeout waiting for pagination on: Bentley
+----- stdout -----
+Timeout waiting for pagination on: Borgward
+----- stdout -----
+Timeout waiting for pagination on: Buick
+----- stdout -----
+Timeout waiting for pagination on: Cadillac
+----- stdout -----
+Timeout waiting for pagination on: Chevrolet
+----- stdout -----
+Timeout waiting for pagination on: Chrysler
+----- stdout -----
+Fetching Citroën page 1/10
+----- stdout -----
+Fetching Citroën page 2/10
+----- stdout -----
+Fetching Citroën page 3/10
+----- stdout -----
+Fetching Citroën page 4/10
+----- stdout -----
+Fetching Citroën page 5/10
+----- stdout -----
+Fetching Citroën page 6/10
+----- stdout -----
+Fetching Citroën page 7/10
+----- stdout -----
+Fetching Citroën page 8/10
+----- stdout -----
+Fetching Citroën page 9/10
+----- stdout -----
+Fetching Citroën page 10/10
+----- stdout -----
+Timeout waiting for pagination on: Corvette
+----- stdout -----
+Fetching Cupra page 1/21
+----- stdout -----
+Fetching Cupra page 2/21
+----- stdout -----
+Fetching Cupra page 3/21
+----- stdout -----
+Fetching Cupra page 4/21
+----- stdout -----
+Fetching Cupra page 5/21
+----- stdout -----
+Fetching Cupra page 6/21
+----- stdout -----
+Fetching Cupra page 7/21
+----- stdout -----
+Fetching Cupra page 8/21
+----- stdout -----
+Fetching Cupra page 9/21
+----- stdout -----
+Fetching Cupra page 10/21
+----- stdout -----
+Fetching Cupra page 11/21
+----- stdout -----
+Fetching Cupra page 12/21
+----- stdout -----
+Fetching Cupra page 13/21
+----- stdout -----
+Fetching Cupra page 14/21
+----- stdout -----
+Fetching Cupra page 15/21
+----- stdout -----
+Fetching Cupra page 16/21
+----- stdout -----
+Fetching Cupra page 17/21
+----- stdout -----
+Fetching Cupra page 18/21
+----- stdout -----
+Fetching Cupra page 19/21
+----- stdout -----
+Fetching Cupra page 20/21
+----- stdout -----
+Fetching Cupra page 21/21
+----- stdout -----
+Fetching DFSK page 1/1
+----- stdout -----
+Timeout waiting for pagination on: DKW
+----- stdout -----
+Fetching DS page 1/1
+----- stdout -----
+Fetching Dacia page 1/1
+----- stdout -----
+Timeout waiting for pagination on: Daewoo
+----- stdout -----
+Timeout waiting for pagination on: Daihatsu
+----- stdout -----
+Timeout waiting for pagination on: Daimler
+----- stdout -----
+Timeout waiting for pagination on: Dallara
+----- stdout -----
+Timeout waiting for pagination on: Datsun
+----- stdout -----
+Timeout waiting for pagination on: Dodge
+----- stdout -----
+Fetching Exlantix page 1/1
+----- stdout -----
+Timeout waiting for pagination on: Ferrari
+----- stdout -----
+Fetching Fiat page 1/14
+----- stdout -----
+Fetching Fiat page 2/14
+----- stdout -----
+Fetching Fiat page 3/14
+----- stdout -----
+Fetching Fiat page 4/14
+----- stdout -----
+Fetching Fiat page 5/14
+----- stdout -----
+Fetching Fiat page 6/14
+----- stdout -----
+Fetching Fiat page 7/14
+----- stdout -----
+Fetching Fiat page 8/14
+----- stdout -----
+Fetching Fiat page 9/14
+----- stdout -----
+Fetching Fiat page 10/14
+----- stdout -----
+Fetching Fiat page 11/14
+----- stdout -----
+Fetching Fiat page 12/14
+----- stdout -----
+Fetching Fiat page 13/14
+----- stdout -----
+Fetching Fiat page 14/14
+----- stdout -----
+Fetching Fisker page 1/1
+----- stdout -----
+Fetching Ford page 1/26
+----- stdout -----
+Fetching Ford page 2/26
+----- stdout -----
+Fetching Ford page 3/26
+----- stdout -----
+Fetching Ford page 4/26
+----- stdout -----
+Fetching Ford page 5/26
+----- stdout -----
+Fetching Ford page 6/26
+----- stdout -----
+Fetching Ford page 7/26
+----- stdout -----
+Fetching Ford page 8/26
+----- stdout -----
+Fetching Ford page 9/26
+----- stdout -----
+Fetching Ford page 10/26
+----- stdout -----
+Fetching Ford page 11/26
+----- stdout -----
+Fetching Ford page 12/26
+----- stdout -----
+Fetching Ford page 13/26
+----- stdout -----
+Fetching Ford page 14/26
+----- stdout -----
+Fetching Ford page 15/26
+----- stdout -----
+Fetching Ford page 16/26
+----- stdout -----
+Fetching Ford page 17/26
+----- stdout -----
+Fetching Ford page 18/26
+----- stdout -----
+Fetching Ford page 19/26
+----- stdout -----
+Fetching Ford page 20/26
+----- stdout -----
+Fetching Ford page 21/26
+----- stdout -----
+Fetching Ford page 22/26
+----- stdout -----
+Fetching Ford page 23/26
+----- stdout -----
+Fetching Ford page 24/26
+----- stdout -----
+Fetching Ford page 25/26
+----- stdout -----
+Fetching Ford page 26/26
+----- stdout -----
+Fetching Honda page 1/1
+----- stdout -----
+Fetching Hongqi page 1/2
+----- stdout -----
+Fetching Hongqi page 2/2
+----- stdout -----
+Fetching Hyundai page 1/25
+----- stdout -----
+Fetching Hyundai page 2/25
+----- stdout -----
+Fetching Hyundai page 3/25
+----- stdout -----
+Fetching Hyundai page 4/25
+----- stdout -----
+Fetching Hyundai page 5/25
+----- stdout -----
+Fetching Hyundai page 6/25
+----- stdout -----
+Fetching Hyundai page 7/25
+----- stdout -----
+Fetching Hyundai page 8/25
+----- stdout -----
+Fetching Hyundai page 9/25
+----- stdout -----
+Fetching Hyundai page 10/25
+----- stdout -----
+Fetching Hyundai page 11/25
+----- stdout -----
+Fetching Hyundai page 12/25
+----- stdout -----
+Fetching Hyundai page 13/25
+----- stdout -----
+Fetching Hyundai page 14/25
+----- stdout -----
+Fetching Hyundai page 15/25
+------------------
+
+[31m---------------------------------------------------------------------------[39m
+[31mKeyboardInterrupt[39m                         Traceback (most recent call last)
+[36mCell[39m[36m [39m[32mIn[8][39m[32m, line 40[39m
+[32m     37[39m listings = []
+[32m     39[39m [38;5;28;01mfor[39;00m b [38;5;129;01min[39;00m car_brands:
+[32m---> [39m[32m40[39m     pl = [43mdownload_brand[49m[43m([49m[43mb[49m[43m,[49m[38;5;28;43mstr[39;49m[43m([49m[43mselected_fuel_type[49m[43m)[49m[43m)[49m
+[32m     41[39m     [38;5;28;01mif[39;00m pl:
+[32m     42[39m         listings.extend(pl)
+
+[36mCell[39m[36m [39m[32mIn[8][39m[32m, line 27[39m, in [36mdownload_brand[39m[34m(brand, selected_fuel_type)[39m
+[32m     25[39m paged_url = [33mf[39m[33m"[39m[38;5;132;01m{[39;00mbase_url[38;5;132;01m}[39;00m[33m&page=[39m[38;5;132;01m{[39;00mpage[38;5;132;01m}[39;00m[33m"[39m
+[32m     26[39m [38;5;28mprint[39m([33mf[39m[33m"[39m[33mFetching [39m[38;5;132;01m{[39;00mbrand[38;5;132;01m}[39;00m[33m page [39m[38;5;132;01m{[39;00mpage[38;5;132;01m}[39;00m[33m/[39m[38;5;132;01m{[39;00mmax_page[38;5;132;01m}[39;00m[33m"[39m)
+[32m---> [39m[32m27[39m [43mdriver[49m[43m.[49m[43mget[49m[43m([49m[43mpaged_url[49m[43m)[49m
+[32m     28[39m soup = BeautifulSoup(driver.page_source, [33m"[39m[33mhtml.parser[39m[33m"[39m)
+[32m     30[39m [38;5;28;01mfor[39;00m art [38;5;129;01min[39;00m soup.find_all([33m"[39m[33marticle[39m[33m"[39m):
+
+[36mFile [39m[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py:452[39m, in [36mWebDriver.get[39m[34m(self, url)[39m
+[32m    439[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34mget[39m([38;5;28mself[39m, url: [38;5;28mstr[39m) -> [38;5;28;01mNone[39;00m:
+[32m    440[39m [38;5;250m    [39m[33;03m"""Navigate the browser to the specified URL.[39;00m
+[32m    441[39m 
+[32m    442[39m [33;03m    The method does not return until the page is fully loaded (i.e. the[39;00m
+[32m   (...)[39m[32m    450[39m [33;03m        `driver.get("https://example.com")`[39;00m
+[32m    451[39m [33;03m    """[39;00m
+[32m--> [39m[32m452[39m     [38;5;28;43mself[39;49m[43m.[49m[43mexecute[49m[43m([49m[43mCommand[49m[43m.[49m[43mGET[49m[43m,[49m[43m [49m[43m{[49m[33;43m"[39;49m[33;43murl[39;49m[33;43m"[39;49m[43m:[49m[43m [49m[43murl[49m[43m}[49m[43m)[49m
+
+[36mFile [39m[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/selenium/webdriver/remote/webdriver.py:429[39m, in [36mWebDriver.execute[39m[34m(self, driver_command, params)[39m
+[32m    426[39m     [38;5;28;01melif[39;00m [33m"[39m[33msessionId[39m[33m"[39m [38;5;129;01mnot[39;00m [38;5;129;01min[39;00m params:
+[32m    427[39m         params[[33m"[39m[33msessionId[39m[33m"[39m] = [38;5;28mself[39m.session_id
+[32m--> [39m[32m429[39m response = [43mcast[49m[43m([49m[43mRemoteConnection[49m[43m,[49m[43m [49m[38;5;28;43mself[39;49m[43m.[49m[43mcommand_executor[49m[43m)[49m[43m.[49m[43mexecute[49m[43m([49m[43mdriver_command[49m[43m,[49m[43m [49m[43mparams[49m[43m)[49m
+[32m    431[39m [38;5;28;01mif[39;00m response:
+[32m    432[39m     [38;5;28mself[39m.error_handler.check_response(response)
+
+[36mFile [39m[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/selenium/webdriver/remote/remote_connection.py:405[39m, in [36mRemoteConnection.execute[39m[34m(self, command, params)[39m
+[32m    403[39m trimmed = [38;5;28mself[39m._trim_large_entries(params)
+[32m    404[39m LOGGER.debug([33m"[39m[38;5;132;01m%s[39;00m[33m [39m[38;5;132;01m%s[39;00m[33m [39m[38;5;132;01m%s[39;00m[33m"[39m, command_info[[32m0[39m], url, [38;5;28mstr[39m(trimmed))
+[32m--> [39m[32m405[39m [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[43m.[49m[43m_request[49m[43m([49m[43mcommand_info[49m[43m[[49m[32;43m0[39;49m[43m][49m[43m,[49m[43m [49m[43murl[49m[43m,[49m[43m [49m[43mbody[49m[43m=[49m[43mdata[49m[43m)[49m
+
+[36mFile [39m[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/selenium/webdriver/remote/remote_connection.py:429[39m, in [36mRemoteConnection._request[39m[34m(self, method, url, body)[39m
+[32m    426[39m     body = [38;5;28;01mNone[39;00m
+[32m    428[39m [38;5;28;01mif[39;00m [38;5;28mself[39m._client_config.keep_alive:
+[32m--> [39m[32m429[39m     response = [38;5;28;43mself[39;49m[43m.[49m[43m_conn[49m[43m.[49m[43mrequest[49m[43m([49m[43mmethod[49m[43m,[49m[43m [49m[43murl[49m[43m,[49m[43m [49m[43mbody[49m[43m=[49m[43mbody[49m[43m,[49m[43m [49m[43mheaders[49m[43m=[49m[43mheaders[49m[43m,[49m[43m [49m[43mtimeout[49m[43m=[49m[38;5;28;43mself[39;49m[43m.[49m[43m_client_config[49m[43m.[49m[43mtimeout[49m[43m)[49m
+[32m    430[39m     statuscode = response.status
+[32m    431[39m [38;5;28;01melse[39;00m:
+
+[36mFile [39m[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/urllib3/_request_methods.py:143[39m, in [36mRequestMethods.request[39m[34m(self, method, url, body, fields, headers, json, **urlopen_kw)[39m
+[32m    135[39m     [38;5;28;01mreturn[39;00m [38;5;28mself[39m.request_encode_url(
+[32m    136[39m         method,
+[32m    137[39m         url,
+[32m   (...)[39m[32m    140[39m         **urlopen_kw,
+[32m    141[39m     )
+[32m    142[39m [38;5;28;01melse[39;00m:
+[32m--> [39m[32m143[39m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[43m.[49m[43mrequest_encode_body[49m[43m([49m
+[32m    144[39m [43m        [49m[43mmethod[49m[43m,[49m[43m [49m[43murl[49m[43m,[49m[43m [49m[43mfields[49m[43m=[49m[43mfields[49m[43m,[49m[43m [49m[43mheaders[49m[43m=[49m[43mheaders[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43murlopen_kw[49m
+[32m    145[39m [43m    [49m[43m)[49m
+
+[36mFile [39m[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/urllib3/_request_methods.py:278[39m, in [36mRequestMethods.request_encode_body[39m[34m(self, method, url, fields, headers, encode_multipart, multipart_boundary, **urlopen_kw)[39m
+[32m    274[39m     extra_kw[[33m"[39m[33mheaders[39m[33m"[39m].setdefault([33m"[39m[33mContent-Type[39m[33m"[39m, content_type)
+[32m    276[39m extra_kw.update(urlopen_kw)
+[32m--> [39m[32m278[39m [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[43m.[49m[43murlopen[49m[43m([49m[43mmethod[49m[43m,[49m[43m [49m[43murl[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43mextra_kw[49m[43m)[49m
+
+[36mFile [39m[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/urllib3/poolmanager.py:457[39m, in [36mPoolManager.urlopen[39m[34m(self, method, url, redirect, **kw)[39m
+[32m    455[39m     response = conn.urlopen(method, url, **kw)
+[32m    456[39m [38;5;28;01melse[39;00m:
+[32m--> [39m[32m457[39m     response = [43mconn[49m[43m.[49m[43murlopen[49m[43m([49m[43mmethod[49m[43m,[49m[43m [49m[43mu[49m[43m.[49m[43mrequest_uri[49m[43m,[49m[43m [49m[43m*[49m[43m*[49m[43mkw[49m[43m)[49m
+[32m    459[39m redirect_location = redirect [38;5;129;01mand[39;00m response.get_redirect_location()
+[32m    460[39m [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m redirect_location:
+
+[36mFile [39m[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/urllib3/connectionpool.py:787[39m, in [36mHTTPConnectionPool.urlopen[39m[34m(self, method, url, body, headers, retries, redirect, assert_same_host, timeout, pool_timeout, release_conn, chunked, body_pos, preload_content, decode_content, **response_kw)[39m
+[32m    784[39m response_conn = conn [38;5;28;01mif[39;00m [38;5;129;01mnot[39;00m release_conn [38;5;28;01melse[39;00m [38;5;28;01mNone[39;00m
+[32m    786[39m [38;5;66;03m# Make the request on the HTTPConnection object[39;00m
+[32m--> [39m[32m787[39m response = [38;5;28;43mself[39;49m[43m.[49m[43m_make_request[49m[43m([49m
+[32m    788[39m [43m    [49m[43mconn[49m[43m,[49m
+[32m    789[39m [43m    [49m[43mmethod[49m[43m,[49m
+[32m    790[39m [43m    [49m[43murl[49m[43m,[49m
+[32m    791[39m [43m    [49m[43mtimeout[49m[43m=[49m[43mtimeout_obj[49m[43m,[49m
+[32m    792[39m [43m    [49m[43mbody[49m[43m=[49m[43mbody[49m[43m,[49m
+[32m    793[39m [43m    [49m[43mheaders[49m[43m=[49m[43mheaders[49m[43m,[49m
+[32m    794[39m [43m    [49m[43mchunked[49m[43m=[49m[43mchunked[49m[43m,[49m
+[32m    795[39m [43m    [49m[43mretries[49m[43m=[49m[43mretries[49m[43m,[49m
+[32m    796[39m [43m    [49m[43mresponse_conn[49m[43m=[49m[43mresponse_conn[49m[43m,[49m
+[32m    797[39m [43m    [49m[43mpreload_content[49m[43m=[49m[43mpreload_content[49m[43m,[49m
+[32m    798[39m [43m    [49m[43mdecode_content[49m[43m=[49m[43mdecode_content[49m[43m,[49m
+[32m    799[39m [43m    [49m[43m*[49m[43m*[49m[43mresponse_kw[49m[43m,[49m
+[32m    800[39m [43m[49m[43m)[49m
+[32m    802[39m [38;5;66;03m# Everything went great![39;00m
+[32m    803[39m clean_exit = [38;5;28;01mTrue[39;00m
+
+[36mFile [39m[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/urllib3/connectionpool.py:534[39m, in [36mHTTPConnectionPool._make_request[39m[34m(self, conn, method, url, body, headers, retries, timeout, chunked, response_conn, preload_content, decode_content, enforce_content_length)[39m
+[32m    532[39m [38;5;66;03m# Receive the response from the server[39;00m
+[32m    533[39m [38;5;28;01mtry[39;00m:
+[32m--> [39m[32m534[39m     response = [43mconn[49m[43m.[49m[43mgetresponse[49m[43m([49m[43m)[49m
+[32m    535[39m [38;5;28;01mexcept[39;00m (BaseSSLError, [38;5;167;01mOSError[39;00m) [38;5;28;01mas[39;00m e:
+[32m    536[39m     [38;5;28mself[39m._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+
+[36mFile [39m[32m~/projects/bilbasen_webscraping/bilbasen_venv/lib/python3.13/site-packages/urllib3/connection.py:571[39m, in [36mHTTPConnection.getresponse[39m[34m(self)[39m
+[32m    568[39m _shutdown = [38;5;28mgetattr[39m([38;5;28mself[39m.sock, [33m"[39m[33mshutdown[39m[33m"[39m, [38;5;28;01mNone[39;00m)
+[32m    570[39m [38;5;66;03m# Get the response from http.client.HTTPConnection[39;00m
+[32m--> [39m[32m571[39m httplib_response = [38;5;28;43msuper[39;49m[43m([49m[43m)[49m[43m.[49m[43mgetresponse[49m[43m([49m[43m)[49m
+[32m    573[39m [38;5;28;01mtry[39;00m:
+[32m    574[39m     assert_header_parsing(httplib_response.msg)
+
+[36mFile [39m[32m/usr/lib/python3.13/http/client.py:1430[39m, in [36mHTTPConnection.getresponse[39m[34m(self)[39m
+[32m   1428[39m [38;5;28;01mtry[39;00m:
+[32m   1429[39m     [38;5;28;01mtry[39;00m:
+[32m-> [39m[32m1430[39m         [43mresponse[49m[43m.[49m[43mbegin[49m[43m([49m[43m)[49m
+[32m   1431[39m     [38;5;28;01mexcept[39;00m [38;5;167;01mConnectionError[39;00m:
+[32m   1432[39m         [38;5;28mself[39m.close()
+
+[36mFile [39m[32m/usr/lib/python3.13/http/client.py:331[39m, in [36mHTTPResponse.begin[39m[34m(self)[39m
+[32m    329[39m [38;5;66;03m# read until we get a non-100 response[39;00m
+[32m    330[39m [38;5;28;01mwhile[39;00m [38;5;28;01mTrue[39;00m:
+[32m--> [39m[32m331[39m     version, status, reason = [38;5;28;43mself[39;49m[43m.[49m[43m_read_status[49m[43m([49m[43m)[49m
+[32m    332[39m     [38;5;28;01mif[39;00m status != CONTINUE:
+[32m    333[39m         [38;5;28;01mbreak[39;00m
+
+[36mFile [39m[32m/usr/lib/python3.13/http/client.py:292[39m, in [36mHTTPResponse._read_status[39m[34m(self)[39m
+[32m    291[39m [38;5;28;01mdef[39;00m[38;5;250m [39m[34m_read_status[39m([38;5;28mself[39m):
+[32m--> [39m[32m292[39m     line = [38;5;28mstr[39m([38;5;28;43mself[39;49m[43m.[49m[43mfp[49m[43m.[49m[43mreadline[49m[43m([49m[43m_MAXLINE[49m[43m [49m[43m+[49m[43m [49m[32;43m1[39;49m[43m)[49m, [33m"[39m[33miso-8859-1[39m[33m"[39m)
+[32m    293[39m     [38;5;28;01mif[39;00m [38;5;28mlen[39m(line) > _MAXLINE:
+[32m    294[39m         [38;5;28;01mraise[39;00m LineTooLong([33m"[39m[33mstatus line[39m[33m"[39m)
+
+[36mFile [39m[32m/usr/lib/python3.13/socket.py:719[39m, in [36mSocketIO.readinto[39m[34m(self, b)[39m
+[32m    717[39m     [38;5;28;01mraise[39;00m [38;5;167;01mOSError[39;00m([33m"[39m[33mcannot read from timed out object[39m[33m"[39m)
+[32m    718[39m [38;5;28;01mtry[39;00m:
+[32m--> [39m[32m719[39m     [38;5;28;01mreturn[39;00m [38;5;28;43mself[39;49m[43m.[49m[43m_sock[49m[43m.[49m[43mrecv_into[49m[43m([49m[43mb[49m[43m)[49m
+[32m    720[39m [38;5;28;01mexcept[39;00m timeout:
+[32m    721[39m     [38;5;28mself[39m._timeout_occurred = [38;5;28;01mTrue[39;00m
+
+[31mKeyboardInterrupt[39m: 
+
+Input Notebook:  bilbasen webscrape v1.1.ipynb
+Output Notebook: output/last_fuel_run_1.ipynb
+Passed unknown parameter: selected_fuel_type
+Input notebook does not contain a cell with tag 'parameters'
+Executing:   0%|          | 0/23 [00:00<?, ?cell/s]Executing notebook with kernel: python3
+Executing:   4%|▍         | 1/23 [00:01<00:28,  1.31s/cell]Executing:   9%|▊         | 2/23 [00:01<00:18,  1.13cell/s]Executing:  17%|█▋        | 4/23 [00:02<00:09,  1.97cell/s]Executing:  22%|██▏       | 5/23 [00:03<00:10,  1.74cell/s]Executing:  35%|███▍      | 8/23 [23:52<1:07:58, 271.90s/cell]Executing:  39%|███▉      | 9/23 [23:53<49:54, 213.87s/cell]  Executing:  43%|████▎     | 10/23 [5:44:32<16:49:42, 4660.17s/cell]Executing:  48%|████▊     | 11/23 [5:44:32<11:38:45, 3493.78s/cell]Executing:  52%|█████▏    | 12/23 [5:45:21<7:54:12, 2586.60s/cell] Executing:  57%|█████▋    | 13/23 [5:46:14<5:15:37, 1893.74s/cell]Executing:  61%|██████    | 14/23 [5:46:19<3:24:29, 1363.26s/cell]Executing:  65%|██████▌   | 15/23 [5:46:33<2:10:15, 976.91s/cell] Executing:  70%|██████▉   | 16/23 [5:46:33<1:20:53, 693.33s/cell]Executing:  74%|███████▍  | 17/23 [5:46:33<49:00, 490.11s/cell]  Executing:  78%|███████▊  | 18/23 [5:46:33<28:47, 345.47s/cell]Executing:  83%|████████▎ | 19/23 [5:46:33<16:12, 243.06s/cell]Executing:  87%|████████▋ | 20/23 [5:46:34<08:32, 170.99s/cell]Executing:  91%|█████████▏| 21/23 [5:46:35<04:00, 120.12s/cell]Executing: 100%|██████████| 23/23 [5:46:35<00:00, 64.89s/cell] Executing: 100%|██████████| 23/23 [5:46:38<00:00, 904.27s/cell]
+Input Notebook:  bilbasen webscrape v1.1 cron_test.ipynb
+Output Notebook: output/last_fuel_run_1.ipynb
+Passed unknown parameter: selected_fuel_type
+Input notebook does not contain a cell with tag 'parameters'
+Executing:   0%|          | 0/20 [00:00<?, ?cell/s]Executing notebook with kernel: python3
+Executing:   5%|▌         | 1/20 [00:01<00:29,  1.57s/cell]Executing:  10%|█         | 2/20 [00:02<00:20,  1.13s/cell]Executing:  20%|██        | 4/20 [00:03<00:10,  1.59cell/s]Executing:  25%|██▌       | 5/20 [00:03<00:10,  1.46cell/s]Executing:  35%|███▌      | 7/20 [16:07<49:02, 226.37s/cell]Executing:  45%|████▌     | 9/20 [5:05:28<11:03:26, 3618.78s/cell]Executing:  50%|█████     | 10/20 [5:05:28<7:48:46, 2812.66s/cell]Executing:  55%|█████▌    | 11/20 [5:06:13<5:21:40, 2144.54s/cell]Executing:  60%|██████    | 12/20 [5:07:03<3:34:17, 1607.23s/cell]Executing:  65%|██████▌   | 13/20 [5:07:09<2:17:25, 1177.94s/cell]Executing:  70%|███████   | 14/20 [5:07:22<1:25:32, 855.34s/cell] Executing:  80%|████████  | 16/20 [5:07:22<31:50, 477.54s/cell]  Executing:  90%|█████████ | 18/20 [5:07:22<09:45, 292.84s/cell]Executing:  95%|█████████▌| 19/20 [5:07:23<03:49, 229.67s/cell]Executing: 100%|██████████| 20/20 [5:07:24<00:00, 175.55s/cell]Executing: 100%|██████████| 20/20 [5:07:26<00:00, 922.35s/cell]

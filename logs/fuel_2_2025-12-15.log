@@ -1,0 +1,12 @@
+Input Notebook:  bilbasen webscrape v1.1.ipynb
+Output Notebook: output/last_fuel_run_2.ipynb
+Passed unknown parameter: selected_fuel_type
+Input notebook does not contain a cell with tag 'parameters'
+Executing:   0%|          | 0/23 [00:00<?, ?cell/s]Executing notebook with kernel: python3
+Executing:   4%|▍         | 1/23 [00:00<00:20,  1.05cell/s]Executing:   9%|▊         | 2/23 [00:01<00:13,  1.51cell/s]Executing:  17%|█▋        | 4/23 [00:01<00:06,  2.80cell/s]Executing:  22%|██▏       | 5/23 [00:02<00:07,  2.35cell/s]Executing:  35%|███▍      | 8/23 [24:12<1:08:56, 275.78s/cell]Executing:  39%|███▉      | 9/23 [24:12<50:37, 216.93s/cell]  [IPKernelApp] WARNING | Parent appears to have exited, shutting down.
+Input Notebook:  bilbasen webscrape v1.1 cron_test.ipynb
+Output Notebook: output/last_fuel_run_2.ipynb
+Passed unknown parameter: selected_fuel_type
+Input notebook does not contain a cell with tag 'parameters'
+Executing:   0%|          | 0/20 [00:00<?, ?cell/s]Executing notebook with kernel: python3
+Executing:   5%|▌         | 1/20 [00:01<00:21,  1.11s/cell]Executing:  10%|█         | 2/20 [00:01<00:13,  1.33cell/s]Executing:  20%|██        | 4/20 [00:02<00:07,  2.28cell/s]Executing:  25%|██▌       | 5/20 [00:03<00:08,  1.70cell/s]Executing:  35%|███▌      | 7/20 [17:35<53:32, 247.09s/cell]Executing:  45%|████▌     | 9/20 [1:55:33<4:03:21, 1327.37s/cell]Executing:  50%|█████     | 10/20 [1:55:33<2:51:56, 1031.70s/cell]Executing:  55%|█████▌    | 11/20 [1:55:50<1:57:59, 786.60s/cell] Executing:  60%|██████    | 12/20 [1:56:07<1:18:34, 589.35s/cell]Executing:  65%|██████▌   | 13/20 [1:56:09<50:22, 431.78s/cell]  Executing:  70%|███████   | 14/20 [1:56:13<31:20, 313.43s/cell]Executing:  80%|████████  | 16/20 [1:56:13<11:40, 175.00s/cell]Executing:  90%|█████████ | 18/20 [1:56:13<03:34, 107.32s/cell]Executing: 100%|██████████| 20/20 [1:56:14<00:00, 69.23s/cell] Executing: 100%|██████████| 20/20 [1:56:16<00:00, 348.81s/cell]
