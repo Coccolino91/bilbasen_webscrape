@@ -12,6 +12,7 @@ __pycache__/
 # Data files
 *.parquet
 data/
+data_alignment
 
 # Jupyter Notebook checkpoint folders
 .ipynb_checkpoints/
