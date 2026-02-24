@@ -1,4 +1,4 @@
-# Ignore virtual environments
+# virtual environments
 venv/
 bilbasen_venv/
 __pycache__/
@@ -9,13 +9,10 @@ __pycache__/
 .vscode/
 .ipynb_checkpoints/
 
-# Data files
+# data files
 *.parquet
 data/
 data_alignment
-
-# Jupyter Notebook checkpoint folders
-.ipynb_checkpoints/
 
 # Cron logs and output
 logs/
